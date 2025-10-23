@@ -1,0 +1,23 @@
+!pip install llama-cpp-python
+
+from llama_cpp import Llama
+
+llm = Llama.from_pretrained(
+    repo_id="PantheonUnbound/Satyr-V0.1-4B",
+    filename="Satyr-V0.1-4B-F16.gguf",
+    n_ctx=4096,
+    n_threads=8,
+    verbose=False
+)
+
+
+promt = "Jelaskan konsep relativitas dalam 2 kalimat singkat."
+output = llm.create_completion(
+    prompt=prompt,
+    max_tokens=256,
+    temperature=0.7,
+    top_p=0.95,
+    repeat_penalty=1.1
+)
+
+print(output["choices"][0]["text"])
